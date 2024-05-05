@@ -11,7 +11,7 @@
   "devDependencies": {
     "@types/chroma-js": "^2.4.3",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^5.2.11"
   },
   "dependencies": {
     "@mapbox/tilebelt": "^1.0.2",

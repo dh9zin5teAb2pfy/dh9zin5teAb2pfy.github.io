@@ -57,14 +57,6 @@ const map = new maplibregl.Map({
                 attribution: "<a href='https://www.gsi.go.jp/' target='_blank'>国土地理院</a>",
                 maxzoom: 18,
             },
-            slopemap: {
-                // 傾斜量図
-                type: 'raster',
-                tiles: ['https://cyberjapandata.gsi.go.jp/xyz/slopemap/{z}/{x}/{y}.png'],
-                tileSize: 256,
-                attribution: "<a href='https://www.gsi.go.jp/' target='_blank'>国土地理院</a>",
-                maxzoom: 15,
-            },
             flood: {
                 // 洪水浸水想定区域（想定最大規模）
                 type: 'raster',
@@ -147,12 +139,6 @@ const map = new maplibregl.Map({
             {
                 id: 'seamlessphoto_layer',
                 source: 'seamlessphoto',
-                type: 'raster',
-                layout: { visibility: 'none' },
-            },
-            {
-                id: 'slopemap_layer',
-                source: 'slopemap',
                 type: 'raster',
                 layout: { visibility: 'none' },
             },
@@ -274,8 +260,8 @@ const map = new maplibregl.Map({
             },
         ],
     },
-    center: [139.477, 35.681], // 地図の中心座標
-    zoom: 9, // 地図の初期ズームレベル
+    center: [139.71353, 35.82530], // 地図の中心座標
+    zoom: 16, // 地図の初期ズームレベル
     maxZoom: 17.99, // 地図の最大ズームレベル
 });
 
@@ -327,7 +313,6 @@ map.on('load', () => {
             // コントロールに表示するレイヤーの定義
             pales_layer: '淡色地図',
             seamlessphoto_layer: '空中写真',
-            slopemap_layer: '傾斜量図',
         },
     });
     map.addControl(baseMaps, 'top-left'); // 第二引数でUIの表示場所を定義
@@ -373,6 +358,13 @@ map.on('load', () => {
 
     // ナビゲーションコントロールの追加
     map.addControl(new maplibregl.NavigationControl({}), 'top-right'); // 画面右上に追加
+
+
+    // 現在位置取得の機能
+    const geolocationControl = new maplibregl.GeolocateControl({trackUserLocation: true, })
+    // 現在地ボタン追加
+    map.addControl(geolocationControl, 'top-right');
+
 });
 
 // 凡例から最も近いラベルを取得

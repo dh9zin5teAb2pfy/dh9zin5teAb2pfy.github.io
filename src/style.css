@@ -23,3 +23,56 @@ body {
         font-size: small;
     }
 }
+
+/* スケールバー */
+.maplibregl-ctrl-scale {
+  /* 位置を調整 */
+  margin-right: 140px !important;
+}
+
+/* PCの場合、トグルボタンは非表示 */
+#toggle-button {
+    display: none;
+}
+
+/* スマホ表示のCSS */
+@media (max-width: 640px) {
+    /* トグルボタン */
+    #toggle-button {
+        display: block;
+        position: absolute;
+        inset: auto auto 10px 10px;
+        padding: 10px;
+        user-select: none;
+        font-size: small;
+        font-weight: bold;
+        > input {
+            display: none;
+        }
+    }
+
+    /* トグルボタン アクティブ時 */
+    #toggle-button:has(input:checked) {
+        color: #33b5e5;
+    }
+
+    /* トグルボタンを状態監視してopacity-controlの表示を制御 */
+    body:has(#toggle-button > input:not(:checked)) #opacity-control {
+        display: none !important;
+    }
+
+    /* 災害情報レイヤーのカラーガイドを非表示 */
+    #hazard-legend {
+        display: none;
+    }
+
+    /* 到達圏レイヤーUIを非表示  */
+    #shelter-control {
+        display: none !important;
+    }
+
+    /* スケールバーの位置を調整 */
+    .maplibregl-ctrl-scale {
+        margin-right: 10px !important;
+    }
+}

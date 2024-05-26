@@ -341,20 +341,20 @@ map.on('load', () => {
     });
 
     // TerrainControlの追加
-    map.addControl(
-        new maplibregl.TerrainControl({
-            source: 'terrain', // 地形ソースを指定
-            exaggeration: 1, // 高さの倍率
-        }),
-        'top-right', // コントロールの位置を指定
-    );
+    //map.addControl(
+    //    new maplibregl.TerrainControl({
+    //        source: 'terrain', // 地形ソースを指定
+    //        exaggeration: 1, // 高さの倍率
+    //   }),
+    //    'top-right', // コントロールの位置を指定
+    //);
 
     // 3D切り替え
-    const terrainComtrol = document.querySelector('.maplibregl-ctrl-terrain');
-    terrainComtrol?.addEventListener('click', () => {
+    //const terrainComtrol = document.querySelector('.maplibregl-ctrl-terrain');
+    //terrainComtrol?.addEventListener('click', () => {
         // 地形が３D表示になっている時は地図を60度傾ける。そうでない時は0度にする。
-        map.getTerrain() ? map.easeTo({ pitch: 60 }) : map.easeTo({ pitch: 0 });
-    });
+    //    map.getTerrain() ? map.easeTo({ pitch: 60 }) : map.easeTo({ pitch: 0 });
+    //});
 
     // ナビゲーションコントロールの追加
     map.addControl(new maplibregl.NavigationControl({}), 'top-right'); // 画面右上に追加
@@ -364,6 +364,15 @@ map.on('load', () => {
     const geolocationControl = new maplibregl.GeolocateControl({trackUserLocation: true, })
     // 現在地ボタン追加
     map.addControl(geolocationControl, 'top-right');
+    // スケールバーの追加
+    map.addControl(
+        new maplibregl.ScaleControl({
+            maxWidth: 200, // スケールの最大幅
+            unit: 'metric', // 単位
+        }),
+        'bottom-right',
+    );
+    
 
 });
 

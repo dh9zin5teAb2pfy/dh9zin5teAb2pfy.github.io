@@ -49,6 +49,15 @@ const map = new maplibregl.Map({
                 maxzoom: 18, // 最大ズームレベル
                 attribution: "<a href='https://www.gsi.go.jp/' target='_blank'>国土地理院</a>", // 地図上に表示される属性テキスト
             },
+            osm: {
+                // ソースの定義
+                type: 'raster',
+                tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 19,
+                attribution:
+                    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            },
             seamlessphoto: {
                 // 全国最新写真
                 type: 'raster',
@@ -56,6 +65,20 @@ const map = new maplibregl.Map({
                 tileSize: 256,
                 attribution: "<a href='https://www.gsi.go.jp/' target='_blank'>国土地理院</a>",
                 maxzoom: 18,
+            },
+            skhb: {
+                // 指定緊急避難場所ベクトルタイル
+                type: 'vector',
+                tiles: [
+                    `${location.href.replace(
+                        '/index.html',
+                        '',
+                    )}/skhb/{z}/{x}/{y}.pbf`,
+                ],
+                minzoom: 5,
+                maxzoom: 8,
+                attribution:
+                    '<a href="https://www.gsi.go.jp/bousaichiri/hinanbasho.html" target="_blank">国土地理院:指定緊急避難場所データ</a>',
             },
             flood: {
                 // 洪水浸水想定区域（想定最大規模）
@@ -119,8 +142,9 @@ const map = new maplibregl.Map({
                 clusterMaxZoom: 12, // クラスタリングを開始するズームレベル
                 clusterRadius: 50, // クラスタリングの半径
             },
+            
             gsi_vector: {
-                // 地理院ベクトル
+                // 地理院ベクトル 建物表示用
                 type: 'vector',
                 tiles: ['https://cyberjapandata.gsi.go.jp/xyz/experimental_bvmap/{z}/{x}/{y}.pbf'],
                 maxzoom: 16,
@@ -135,7 +159,13 @@ const map = new maplibregl.Map({
                 type: 'raster', // データタイプはラスターを指定
                 layout: { visibility: 'none' }, // 初期状態を非表示にする（ほかのラスターレイヤーも同様）
             },
-            // 全国最新写真と傾斜量図のレイヤーを表示
+            {
+                id: 'osm_layer', // レイヤーのID
+                source: 'osm', // ソースのID
+                type: 'raster', // データタイプはラスターを指定
+                layout: { visibility: 'none' }, // 初期状態を非表示にする（ほかのラスターレイヤーも同様）
+            },
+            // 全国最新写真のレイヤーを表示
             {
                 id: 'seamlessphoto_layer',
                 source: 'seamlessphoto',
@@ -219,7 +249,7 @@ const map = new maplibregl.Map({
                         40, // 堅ろう無壁舎
                         10,
                     ], // その他
-                    'fill-extrusion-opacity': 0.6,
+                    'fill-extrusion-opacity': 0.4,
                 },
             },
             {
@@ -258,6 +288,186 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#FFF', // ポイントの枠線の色
                 },
             },
+            
+            // 指定緊急避難場所ここから
+            {
+                id: 'skhb-1-layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        // ズームレベルに応じた円の大きさ
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster1'], // 属性:disaster1がtrueの地物のみ表示する
+                layout: { visibility: 'none' }, // レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+            },
+            {
+                id: 'skhb-2-layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster2'],
+                layout: { visibility: 'none' },
+            },
+            {
+                id: 'skhb-3-layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster3'],
+                layout: { visibility: 'none' },
+            },
+            {
+                id: 'skhb-4-layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster4'],
+                layout: { visibility: 'none' },
+            },
+            {
+                id: 'skhb-5-layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster5'],
+                layout: { visibility: 'none' },
+            },
+            {
+                id: 'skhb-6-layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster6'],
+                layout: { visibility: 'none' },
+            },
+            {
+                id: 'skhb-7-layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster7'],
+                layout: { visibility: 'none' },
+            },
+            {
+                id: 'skhb-8-layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster8'],
+                layout: { visibility: 'none' },
+            },
+
         ],
     },
     center: [139.71353, 35.82530], // 地図の中心座標
@@ -291,6 +501,53 @@ const updatedLegend = (layerId: string) => {
     popup && popup.remove();
 };
 
+/**
+ * 現在選択されている指定緊急避難場所レイヤー(skhb)を特定しそのfilter条件を返す
+ */
+const getCurrentSkhbLayerFilter = () => {
+    const style = map.getStyle(); // style定義を取得
+    const skhbLayers = style.layers.filter((layer) =>
+        // `skhb`から始まるlayerを抽出
+        layer.id.startsWith('skhb'),
+    );
+    const visibleSkhbLayers = skhbLayers.filter(
+        // 現在表示中のレイヤーを見つける
+        (layer) => layer.layout.visibility === 'visible',
+    );
+    return visibleSkhbLayers[0].filter; // 表示中レイヤーのfilter条件を返す
+};
+
+/**
+ * 経緯度を渡すと最寄りの指定緊急避難場所を返す
+ */
+const getNearestFeature = (longitude, latitude) => {
+    // 現在表示中の指定緊急避難場所のタイルデータ（＝地物）を取得する
+    const currentSkhbLayerFilter = getCurrentSkhbLayerFilter();
+    const features = map.querySourceFeatures('skhb', {
+        sourceLayer: 'skhb',
+        filter: currentSkhbLayerFilter,
+    });
+
+    // 現在地に最も近い地物を見つける
+    const nearestFeature = features.reduce((minDistFeature, feature) => {
+        const dist = distance(
+            [longitude, latitude],
+            feature.geometry.coordinates,
+        );
+        if (minDistFeature === null || minDistFeature.properties.dist > dist)
+            return {
+                ...feature,
+                properties: {
+                    ...feature.properties,
+                    dist,
+                },
+            };
+        return minDistFeature;
+    }, null);
+
+    return nearestFeature;
+};
+
 // マップの初期ロード完了時に発火するイベント
 map.on('load', () => {
     map.addLayer(
@@ -312,6 +569,7 @@ map.on('load', () => {
         baseLayers: {
             // コントロールに表示するレイヤーの定義
             pales_layer: '淡色地図',
+            osm_layer: 'OSマップ',
             seamlessphoto_layer: '空中写真',
         },
     });
@@ -464,51 +722,86 @@ const rasterClick = async (lng: number, lat: number) => {
 
 // マップのクリックイベント
 map.on('click', (e) => {
-    // 避難所の地物を取得
-    const features = map.queryRenderedFeatures(e.point, { layers: ['shelter_point'] });
+    // クリック箇所に指定緊急避難場所レイヤーが存在するかどうかをチェック
+    const features = map.queryRenderedFeatures(e.point, {
+        layers: [
+            'skhb-1-layer',
+            'skhb-2-layer',
+            'skhb-3-layer',
+            'skhb-4-layer',
+            'skhb-5-layer',
+            'skhb-6-layer',
+            'skhb-7-layer',
+            'skhb-8-layer',
+        ],
+    });
+    if (features.length === 0) return; // 地物がなければ処理を終了
 
-    if (features.length === 0) {
-        // 避難所の地物がない場合は、災害情報レイヤーのクリックイベントを発火
-        rasterClick(e.lngLat.lng, e.lngLat.lat);
-        return;
-    }
-
-    const feature = features[0];
-    if (feature.geometry.type !== 'Point') return;
-    const coordinates = feature.geometry.coordinates as [number, number]; // ポイント座標
-
-    // クリックした避難所の情報を取得
-    const prop = feature.properties;
-    const name = prop['避難所_施設名称']; // 名称
-    const address = prop['所在地住所']; // 住所
-
-    // バリアフリー情報を取得
-    const elevation = prop['エレベーター有/\n避難スペースが１階']; // エレベーター、避難所スペース
-    const slope = prop['スロープ等']; // スロープ
-    const block = prop['点字ブロック']; // 点字ブロック
-    const toilet = prop['車椅子使用者対応トイレ']; // トイレ
-    const other = prop['その他']; // その他
-
-    // バリアフリー情報を整形 nullの項目は表示しない
-    let barrierFree = '';
-    if (elevation === '○') barrierFree += '<li>エレベーター有り/避難スペースが1階</li>';
-    if (slope === '○') barrierFree += '<li>スロープ等有り</li>';
-    if (block === '○') barrierFree += '<li>点字ブロック有り</li>';
-    if (toilet === '○') barrierFree += '<li>車椅子使用者対応トイレ有り</li>';
-    if (other === '○') barrierFree += `<li>${other}</li>`;
-    if (!barrierFree) barrierFree = '<li>なし</li>'; // バリアフリー情報がない場合は「なし」と表示
-    const html = `<h2>${name}</h2><div>住所:${address}</div><hr /><b>バリアフリー情報</b>${barrierFree}`;
-
-    // ポップアップを表示
-    popup = new maplibregl.Popup({
-        maxWidth: '300px',
-        offset: [0, -15],
-    })
-        .setLngLat(coordinates)
-        .setHTML(html)
+    // 地物があればポップアップを表示する
+    const feature = features[0]; // 複数の地物が見つかっている場合は最初の要素を用いる
+    const popup = new maplibregl.Popup()
+        .setLngLat(feature.geometry.coordinates) // [lon, lat]
+        // 名称・住所・備考・対応している災害種別を表示するよう、HTMLを文字列でセット
+        .setHTML(
+            `\
+    <div style="font-weight:900; font-size: 1.2rem;">${
+        feature.properties.name
+    }</div>\
+    <div>${feature.properties.address}</div>\
+    <div>${feature.properties.remarks ?? ''}</div>\
+    <div>\
+    <span${
+        feature.properties.disaster1 ? '' : ' style="color:#ccc;"'
+    }">洪水</span>\
+    <span${
+        feature.properties.disaster2 ? '' : ' style="color:#ccc;"'
+    }> 崖崩れ/土石流/地滑り</span>\
+    <span${
+        feature.properties.disaster3 ? '' : ' style="color:#ccc;"'
+    }> 高潮</span>\
+    <span${
+        feature.properties.disaster4 ? '' : ' style="color:#ccc;"'
+    }> 地震</span>\
+    <div>\
+    <span${
+        feature.properties.disaster5 ? '' : ' style="color:#ccc;"'
+    }>津波</span>\
+    <span${
+        feature.properties.disaster6 ? '' : ' style="color:#ccc;"'
+    }> 大規模な火事</span>\
+    <span${
+        feature.properties.disaster7 ? '' : ' style="color:#ccc;"'
+    }> 内水氾濫</span>\
+    <span${
+        feature.properties.disaster8 ? '' : ' style="color:#ccc;"'
+    }> 火山現象</span>\
+    </div>`,
+        )
+        .setMaxWidth('400px')
         .addTo(map);
 });
 
 // マウスカーソルのスタイルを変更
-map.on('mouseenter', 'shelter_point', () => (map.getCanvas().style.cursor = 'pointer'));
-map.on('mouseleave', 'shelter_point', () => (map.getCanvas().style.cursor = ''));
+// 地図上でマウスが移動した際のイベント
+map.on('mousemove', (e) => {
+    // マウスカーソル以下に指定緊急避難場所レイヤーが存在するかどうかをチェック
+    const features = map.queryRenderedFeatures(e.point, {
+        layers: [
+            'skhb-1-layer',
+            'skhb-2-layer',
+            'skhb-3-layer',
+            'skhb-4-layer',
+            'skhb-5-layer',
+            'skhb-6-layer',
+            'skhb-7-layer',
+            'skhb-8-layer',
+        ],
+    });
+    if (features.length > 0) {
+        // 地物が存在する場合はカーソルをpointerに変更
+        map.getCanvas().style.cursor = 'pointer';
+    } else {
+        // 存在しない場合はデフォルト
+        map.getCanvas().style.cursor = '';
+    }
+});

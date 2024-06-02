@@ -7,7 +7,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import OpacityControl from 'maplibre-gl-opacity';
 import 'maplibre-gl-opacity/dist/maplibre-gl-opacity.css';
 
-import shelterPointData from './shelter_point.json'; // 避難所データの読み込み
+//import shelterPointData from './shelter_point.json'; // 避難所データの読み込み
 import hazardLegendData from './hazard_legend.json'; // 凡例データの読み込み
 
 // maplibre-gl-gsi-terrainの読み込み
@@ -134,14 +134,14 @@ const map = new maplibregl.Map({
                 tileSize: 256,
                 attribution: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html">ハザードマップポータルサイト</a>',
             },
-            shelter: {
-                type: 'geojson', // データタイプはgeojsonを指定
-                data: shelterPointData,
-                attribution: '<a href="https://www.bousai.metro.tokyo.lg.jp/bousai/1000026/1000316.html" target="_blank">東京都避難所、避難場所データ オープンデータ</a>',
-                cluster: true, // クラスタリングの有効化
-                clusterMaxZoom: 12, // クラスタリングを開始するズームレベル
-                clusterRadius: 50, // クラスタリングの半径
-            },
+//            shelter: {
+//                type: 'geojson', // データタイプはgeojsonを指定
+//                data: shelterPointData,
+//                attribution: '<a href="https://www.bousai.metro.tokyo.lg.jp/bousai/1000026/1000316.html" target="_blank">東京都避難所、避難場所データ オープンデータ</a>',
+//                cluster: true, // クラスタリングの有効化
+//                clusterMaxZoom: 12, // クラスタリングを開始するズームレベル
+//                clusterRadius: 50, // クラスタリングの半径
+//            },
             
             gsi_vector: {
                 // 地理院ベクトル 建物表示用
@@ -252,42 +252,42 @@ const map = new maplibregl.Map({
                     'fill-extrusion-opacity': 0.4,
                 },
             },
-            {
-                id: 'clusters', // クラスター
-                source: 'shelter',
-                type: 'circle',
-                filter: ['has', 'point_count'], // クラスターに含まれるポイントのみ表示
-                paint: {
-                    'circle-color': '#0BB1AF', // クラスターの色
-                    'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40], // クラスターのポイント数に応じてサイズを変更
-                    'circle-blur': 0.3, // クラスターのぼかし
-                },
-            },
-            {
-                id: 'cluster-count', // クラスターのポイントの数
-                source: 'shelter',
-                type: 'symbol',
-                filter: ['has', 'point_count'], // クラスターに含まれるポイントのみ表示
-                layout: {
-                    'text-field': '{point_count_abbreviated}', // クラスターのポイント数を表示
-                    'text-size': 12, // テキストのサイズ
-                },
-                paint: {
-                    'text-color': '#FFF',
-                },
-            },
-            {
-                id: 'shelter_point',
-                source: 'shelter',
-                type: 'circle', // ポイントデータを表示するためにcircleを指定
-                filter: ['!', ['has', 'point_count']], // クラスターに含まれないポイントのみ表示
-                paint: {
-                    'circle-color': '#0BB1AF', // ポイントの色
-                    'circle-radius': 8, // ポイントのサイズ
-                    'circle-stroke-width': 2, // ポイントの枠線の太さ
-                    'circle-stroke-color': '#FFF', // ポイントの枠線の色
-                },
-            },
+//            {
+//                id: 'clusters', // クラスター
+//                source: 'shelter',
+//                type: 'circle',
+//                filter: ['has', 'point_count'], // クラスターに含まれるポイントのみ表示
+//                paint: {
+//                    'circle-color': '#0BB1AF', // クラスターの色
+//                    'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40], // クラスターのポイント数に応じてサイズを変更
+//                    'circle-blur': 0.3, // クラスターのぼかし
+//                },
+//            },
+//            {
+//                id: 'cluster-count', // クラスターのポイントの数
+//                source: 'shelter',
+//                type: 'symbol',
+//                filter: ['has', 'point_count'], // クラスターに含まれるポイントのみ表示
+//                layout: {
+//                    'text-field': '{point_count_abbreviated}', // クラスターのポイント数を表示
+//                    'text-size': 12, // テキストのサイズ
+//                },
+//                paint: {
+//                    'text-color': '#FFF',
+//                },
+//            },
+//            {
+//                id: 'shelter_point',
+//                source: 'shelter',
+//                type: 'circle', // ポイントデータを表示するためにcircleを指定
+//                filter: ['!', ['has', 'point_count']], // クラスターに含まれないポイントのみ表示
+//                paint: {
+//                    'circle-color': '#0BB1AF', // ポイントの色
+//                    'circle-radius': 8, // ポイントのサイズ
+//                    'circle-stroke-width': 2, // ポイントの枠線の太さ
+//                    'circle-stroke-color': '#FFF', // ポイントの枠線の色
+//                },
+//            },
             
             // 指定緊急避難場所ここから
             {
@@ -311,7 +311,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster1'], // 属性:disaster1がtrueの地物のみ表示する
-                layout: { visibility: 'none' }, // レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+                layout: { visibility: 'visible' }, // レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
             {
                 id: 'skhb-2-layer',
@@ -504,6 +504,7 @@ const updatedLegend = (layerId: string) => {
 /**
  * 現在選択されている指定緊急避難場所レイヤー(skhb)を特定しそのfilter条件を返す
  */
+/*
 const getCurrentSkhbLayerFilter = () => {
     const style = map.getStyle(); // style定義を取得
     const skhbLayers = style.layers.filter((layer) =>
@@ -516,10 +517,11 @@ const getCurrentSkhbLayerFilter = () => {
     );
     return visibleSkhbLayers[0].filter; // 表示中レイヤーのfilter条件を返す
 };
-
+*/
 /**
  * 経緯度を渡すと最寄りの指定緊急避難場所を返す
  */
+/*
 const getNearestFeature = (longitude, latitude) => {
     // 現在表示中の指定緊急避難場所のタイルデータ（＝地物）を取得する
     const currentSkhbLayerFilter = getCurrentSkhbLayerFilter();
@@ -527,9 +529,10 @@ const getNearestFeature = (longitude, latitude) => {
         sourceLayer: 'skhb',
         filter: currentSkhbLayerFilter,
     });
-
+*/
     // 現在地に最も近い地物を見つける
-    const nearestFeature = features.reduce((minDistFeature, feature) => {
+/*
+const nearestFeature = features.reduce((minDistFeature, feature) => {
         const dist = distance(
             [longitude, latitude],
             feature.geometry.coordinates,
@@ -547,7 +550,7 @@ const getNearestFeature = (longitude, latitude) => {
 
     return nearestFeature;
 };
-
+*/
 // マップの初期ロード完了時に発火するイベント
 map.on('load', () => {
     map.addLayer(
@@ -601,9 +604,9 @@ map.on('load', () => {
     // TerrainControlの追加
     //map.addControl(
     //    new maplibregl.TerrainControl({
-    //        source: 'terrain', // 地形ソースを指定
+    //       source: 'terrain', // 地形ソースを指定
     //        exaggeration: 1, // 高さの倍率
-    //   }),
+    //}),
     //    'top-right', // コントロールの位置を指定
     //);
 
@@ -630,7 +633,96 @@ map.on('load', () => {
         }),
         'bottom-right',
     );
-    
+    // マップのクリックイベント
+    map.on('click', (e) => {
+        // クリック箇所に指定緊急避難場所レイヤーが存在するかどうかをチェック
+        const features = map.queryRenderedFeatures(e.point, {
+            layers: [
+                'skhb-1-layer',
+                'skhb-2-layer',
+                'skhb-3-layer',
+                'skhb-4-layer',
+                'skhb-5-layer',
+                'skhb-6-layer',
+                'skhb-7-layer',
+                'skhb-8-layer',
+            ],
+        });
+        
+        if (features.length === 0) {
+            // 避難所の地物がない場合は、災害情報レイヤーのクリックイベントを発火
+            rasterClick(e.lngLat.lng, e.lngLat.lat);
+            return;
+        }
+        
+        // 地物があればポップアップを表示する
+        const feature = features[0]; // 複数の地物が見つかっている場合は最初の要素を用いる
+        const popup = new maplibregl.Popup();
+        popup.setLngLat(feature.geometry.coordinates) // [lon, lat]
+            // 名称・住所・備考・対応している災害種別を表示するよう、HTMLを文字列でセット
+            .setHTML(
+                `\
+        <div style="font-weight:900; font-size: 1.2rem;">${
+            feature.properties.name
+        }</div>\
+        <div>${feature.properties.address}</div>\
+        <div>${feature.properties.remarks ?? ''}</div>\
+        <div>\
+        <span${
+            feature.properties.disaster1 ? '' : ' style="color:#ccc;"'
+        }">洪水</span>\
+        <span${
+            feature.properties.disaster2 ? '' : ' style="color:#ccc;"'
+        }> 崖崩れ/土石流/地滑り</span>\
+        <span${
+            feature.properties.disaster3 ? '' : ' style="color:#ccc;"'
+        }> 高潮</span>\
+        <span${
+            feature.properties.disaster4 ? '' : ' style="color:#ccc;"'
+        }> 地震</span>\
+        <div>\
+        <span${
+            feature.properties.disaster5 ? '' : ' style="color:#ccc;"'
+        }>津波</span>\
+        <span${
+            feature.properties.disaster6 ? '' : ' style="color:#ccc;"'
+        }> 大規模な火事</span>\
+        <span${
+            feature.properties.disaster7 ? '' : ' style="color:#ccc;"'
+        }> 内水氾濫</span>\
+        <span${
+            feature.properties.disaster8 ? '' : ' style="color:#ccc;"'
+        }> 火山現象</span>\
+        </div>`,
+            )
+            .setMaxWidth('400px')
+            .addTo(map);
+    });
+
+    // マウスカーソルのスタイルを変更
+    // 地図上でマウスが移動した際のイベント
+    map.on('mousemove', (e) => {
+        // マウスカーソル以下に指定緊急避難場所レイヤーが存在するかどうかをチェック
+        const features = map.queryRenderedFeatures(e.point, {
+            layers: [
+                'skhb-1-layer',
+                'skhb-2-layer',
+                'skhb-3-layer',
+                'skhb-4-layer',
+                'skhb-5-layer',
+                'skhb-6-layer',
+                'skhb-7-layer',
+                'skhb-8-layer',
+            ],
+        });
+        if (features.length > 0) {
+            // 地物が存在する場合はカーソルをpointerに変更
+            map.getCanvas().style.cursor = 'pointer';
+        } else {
+            // 存在しない場合はデフォルト
+            map.getCanvas().style.cursor = '';
+        }
+    });
 
 });
 
@@ -720,88 +812,4 @@ const rasterClick = async (lng: number, lat: number) => {
     });
 };
 
-// マップのクリックイベント
-map.on('click', (e) => {
-    // クリック箇所に指定緊急避難場所レイヤーが存在するかどうかをチェック
-    const features = map.queryRenderedFeatures(e.point, {
-        layers: [
-            'skhb-1-layer',
-            'skhb-2-layer',
-            'skhb-3-layer',
-            'skhb-4-layer',
-            'skhb-5-layer',
-            'skhb-6-layer',
-            'skhb-7-layer',
-            'skhb-8-layer',
-        ],
-    });
-    if (features.length === 0) return; // 地物がなければ処理を終了
 
-    // 地物があればポップアップを表示する
-    const feature = features[0]; // 複数の地物が見つかっている場合は最初の要素を用いる
-    const popup = new maplibregl.Popup()
-        .setLngLat(feature.geometry.coordinates) // [lon, lat]
-        // 名称・住所・備考・対応している災害種別を表示するよう、HTMLを文字列でセット
-        .setHTML(
-            `\
-    <div style="font-weight:900; font-size: 1.2rem;">${
-        feature.properties.name
-    }</div>\
-    <div>${feature.properties.address}</div>\
-    <div>${feature.properties.remarks ?? ''}</div>\
-    <div>\
-    <span${
-        feature.properties.disaster1 ? '' : ' style="color:#ccc;"'
-    }">洪水</span>\
-    <span${
-        feature.properties.disaster2 ? '' : ' style="color:#ccc;"'
-    }> 崖崩れ/土石流/地滑り</span>\
-    <span${
-        feature.properties.disaster3 ? '' : ' style="color:#ccc;"'
-    }> 高潮</span>\
-    <span${
-        feature.properties.disaster4 ? '' : ' style="color:#ccc;"'
-    }> 地震</span>\
-    <div>\
-    <span${
-        feature.properties.disaster5 ? '' : ' style="color:#ccc;"'
-    }>津波</span>\
-    <span${
-        feature.properties.disaster6 ? '' : ' style="color:#ccc;"'
-    }> 大規模な火事</span>\
-    <span${
-        feature.properties.disaster7 ? '' : ' style="color:#ccc;"'
-    }> 内水氾濫</span>\
-    <span${
-        feature.properties.disaster8 ? '' : ' style="color:#ccc;"'
-    }> 火山現象</span>\
-    </div>`,
-        )
-        .setMaxWidth('400px')
-        .addTo(map);
-});
-
-// マウスカーソルのスタイルを変更
-// 地図上でマウスが移動した際のイベント
-map.on('mousemove', (e) => {
-    // マウスカーソル以下に指定緊急避難場所レイヤーが存在するかどうかをチェック
-    const features = map.queryRenderedFeatures(e.point, {
-        layers: [
-            'skhb-1-layer',
-            'skhb-2-layer',
-            'skhb-3-layer',
-            'skhb-4-layer',
-            'skhb-5-layer',
-            'skhb-6-layer',
-            'skhb-7-layer',
-            'skhb-8-layer',
-        ],
-    });
-    if (features.length > 0) {
-        // 地物が存在する場合はカーソルをpointerに変更
-        map.getCanvas().style.cursor = 'pointer';
-    } else {
-        // 存在しない場合はデフォルト
-        map.getCanvas().style.cursor = '';
-    }
-});

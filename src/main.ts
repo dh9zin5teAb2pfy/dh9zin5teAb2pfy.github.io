@@ -658,7 +658,8 @@ map.on('load', () => {
         // 地物があればポップアップを表示する
         const feature = features[0]; // 複数の地物が見つかっている場合は最初の要素を用いる
         const popup = new maplibregl.Popup();
-        popup.setLngLat(feature.geometry.coordinates) // [lon, lat]
+        //popup.setLngLat(feature.geometry.coordinates) // [lon, lat]
+        popup.setLngLat([e.lngLat.lng, e.lngLat.lat])
             // 名称・住所・備考・対応している災害種別を表示するよう、HTMLを文字列でセット
             .setHTML(
                 `\

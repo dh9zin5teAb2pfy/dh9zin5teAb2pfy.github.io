@@ -602,14 +602,14 @@ map.on('load', () => {
     });
 
     // TerrainControlの追加
-    //map.addControl(
-    //    new maplibregl.TerrainControl({
-    //       source: 'terrain', // 地形ソースを指定
-    //        exaggeration: 1, // 高さの倍率
-    //}),
-    //    'top-right', // コントロールの位置を指定
-    //);
-
+/*    map.addControl(
+        new maplibregl.TerrainControl({
+           source: 'terrain', // 地形ソースを指定
+            exaggeration: 1, // 高さの倍率
+    }),
+        'top-right', // コントロールの位置を指定
+    );
+*/
     // 3D切り替え
     //const terrainComtrol = document.querySelector('.maplibregl-ctrl-terrain');
     //terrainComtrol?.addEventListener('click', () => {

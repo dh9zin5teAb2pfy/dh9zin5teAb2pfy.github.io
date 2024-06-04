@@ -1,5 +1,5 @@
 {
-    "theme_color":"33cc00",
+    "theme_color":"#33cc00",
     "background_color":"#6633ff",
     "display":"standalone",
     "scope":"./",

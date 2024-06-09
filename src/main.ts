@@ -9,6 +9,7 @@ import 'maplibre-gl-opacity/dist/maplibre-gl-opacity.css';
 
 //import shelterPointData from './shelter_point.json'; // 避難所データの読み込み
 import hazardLegendData from './hazard_legend.json'; // 凡例データの読み込み
+import communityPointData from './community_point.json' // 上青木西町会境界線
 
 // maplibre-gl-gsi-terrainの読み込み
 import { useGsiTerrainSource } from 'maplibre-gl-gsi-terrain';
@@ -50,7 +51,7 @@ const map = new maplibregl.Map({
                 attribution: "<a href='https://www.gsi.go.jp/' target='_blank'>国土地理院</a>", // 地図上に表示される属性テキスト
             },
             osm: {
-                // ソースの定義
+                // Open Street Map
                 type: 'raster',
                 tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
                 tileSize: 256,
@@ -143,6 +144,44 @@ const map = new maplibregl.Map({
 //                clusterRadius: 50, // クラスタリングの半径
 //            },
             
+             community: {
+                type: 'geojson',
+                    data: {
+                           type: 'Feature',
+                    geometry: {
+                    type: 'LineString',
+                    coordinates: [
+                        [139.710454,35.828449],
+                        [139.71108,35.82825],
+                        [139.71208,35.82789],
+                        [139.71235,35.82769],
+                        [139.71305,35.82720],
+                        [139.71320,35.82695],
+                        [139.71332,35.82694],
+                        [139.71374,35.82681],
+                        [139.71445,35.82648],
+                        [139.71530,35.82626],
+                        [139.71542,35.82620],
+                        [139.71545,35.82609],
+                        [139.71573,35.82607],
+                        [139.71728,35.82563],
+                        [139.71724,35.82342],
+                        [139.71375,35.82339],
+                        [139.71226,35.82335],
+                        [139.71215,35.82344],
+                        [139.71212,35.82359],
+                        [139.70975,35.82356],
+                        [139.70988,35.82504],
+                        [139.71114,35.82497],
+                        [139.71114,35.82619],
+                        [139.71004,35.82624],
+                        [139.71014,35.82658],
+                        [139.710454,35.828449],
+                    ]
+                    },
+                     }
+            },
+  
             gsi_vector: {
                 // 地理院ベクトル 建物表示用
                 type: 'vector',
@@ -151,6 +190,7 @@ const map = new maplibregl.Map({
                 minzoom: 4,
                 attribution: "<a href='https://www.gsi.go.jp/' target='_blank'>国土地理院</a>",
             },
+   
         },
         layers: [
             {
@@ -226,6 +266,17 @@ const map = new maplibregl.Map({
                 layout: { visibility: 'none' },
             },
             {
+                id: 'community_layer',
+                source: 'community',
+                type: 'line',
+                paint: {
+                    'line-color': '#33aaff',
+                    'line-width': 4,
+                   },
+                layout: { visibility: 'none' },
+            },
+            
+            {
                 id: 'building', // 建物レイヤー
                 source: 'gsi_vector',
                 'source-layer': 'building',
@@ -251,7 +302,9 @@ const map = new maplibregl.Map({
                     ], // その他
                     'fill-extrusion-opacity': 0.4,
                 },
+                layout: { visibility: 'visible' },
             },
+             
 //            {
 //                id: 'clusters', // クラスター
 //                source: 'shelter',
@@ -290,7 +343,7 @@ const map = new maplibregl.Map({
 //            },
             
             // 指定緊急避難場所ここから
-            {
+            {   // 洪水
                 id: 'skhb-1-layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
@@ -313,7 +366,7 @@ const map = new maplibregl.Map({
                 filter: ['get', 'disaster1'], // 属性:disaster1がtrueの地物のみ表示する
                 layout: { visibility: 'visible' }, // レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
-            {
+            {   // 崖崩れ/土石流/地滑り
                 id: 'skhb-2-layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
@@ -335,7 +388,7 @@ const map = new maplibregl.Map({
                 filter: ['get', 'disaster2'],
                 layout: { visibility: 'none' },
             },
-            {
+            {   // 高潮
                 id: 'skhb-3-layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
@@ -357,8 +410,8 @@ const map = new maplibregl.Map({
                 filter: ['get', 'disaster3'],
                 layout: { visibility: 'none' },
             },
-            {
-                id: 'skhb-4-layer',
+            {   // 地震
+                id: 'skhb4_layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
                 type: 'circle',
@@ -379,7 +432,7 @@ const map = new maplibregl.Map({
                 filter: ['get', 'disaster4'],
                 layout: { visibility: 'none' },
             },
-            {
+            {   // 津波
                 id: 'skhb-5-layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
@@ -401,7 +454,7 @@ const map = new maplibregl.Map({
                 filter: ['get', 'disaster5'],
                 layout: { visibility: 'none' },
             },
-            {
+            {   // 大規模な火事
                 id: 'skhb-6-layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
@@ -423,7 +476,7 @@ const map = new maplibregl.Map({
                 filter: ['get', 'disaster6'],
                 layout: { visibility: 'none' },
             },
-            {
+            {   // 内水氾濫
                 id: 'skhb-7-layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
@@ -445,7 +498,7 @@ const map = new maplibregl.Map({
                 filter: ['get', 'disaster7'],
                 layout: { visibility: 'none' },
             },
-            {
+            {   // 火山現象
                 id: 'skhb-8-layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
@@ -569,13 +622,15 @@ map.on('load', () => {
 
     // 背景地図の切り替えコントロール
     const baseMaps = new OpacityControl({
-        baseLayers: {
-            // コントロールに表示するレイヤーの定義
-            pales_layer: '淡色地図',
-            osm_layer: 'OSマップ',
-            seamlessphoto_layer: '空中写真',
-        },
-    });
+                             baseLayers: {
+                                 // コントロールに表示するレイヤーの定義
+                                 pales_layer: '淡色地図',
+                                 osm_layer: 'OSマップ',
+                                 seamlessphoto_layer: '空中写真',
+                             },
+                             overLayers:{
+                                 community_layer: '上青木西町会',
+                             }});
     map.addControl(baseMaps, 'top-left'); // 第二引数でUIの表示場所を定義
 
     // 災害情報レイヤーの切り替えコントロール
@@ -587,6 +642,10 @@ map.on('load', () => {
             doseki_layer: '土石流',
             kyukeisha_layer: '急傾斜地',
             jisuberi_layer: '地滑り',
+//            skhb4_layer: '地震緊急避難所'
+//            skhb-6-layer: '大規模な火事緊急避難所',
+//            skhb-8-layer: '火山緊急避難所'
+            //community_layer: '上青木西町会'
         },
     });
     map.addControl(hazardLayers, 'top-left');
@@ -641,7 +700,7 @@ map.on('load', () => {
                 'skhb-1-layer',
                 'skhb-2-layer',
                 'skhb-3-layer',
-                'skhb-4-layer',
+                'skhb4_layer',
                 'skhb-5-layer',
                 'skhb-6-layer',
                 'skhb-7-layer',
@@ -709,7 +768,7 @@ map.on('load', () => {
                 'skhb-1-layer',
                 'skhb-2-layer',
                 'skhb-3-layer',
-                'skhb-4-layer',
+                'skhb4_layer',
                 'skhb-5-layer',
                 'skhb-6-layer',
                 'skhb-7-layer',

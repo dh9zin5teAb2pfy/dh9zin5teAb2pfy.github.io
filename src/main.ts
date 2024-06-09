@@ -9,7 +9,7 @@ import 'maplibre-gl-opacity/dist/maplibre-gl-opacity.css';
 
 //import shelterPointData from './shelter_point.json'; // 避難所データの読み込み
 import hazardLegendData from './hazard_legend.json'; // 凡例データの読み込み
-import communityPointData from './community_point.json' // 上青木西町会境界線
+//import communityPointData from './community_point.json' // 上青木西町会境界線
 
 // maplibre-gl-gsi-terrainの読み込み
 import { useGsiTerrainSource } from 'maplibre-gl-gsi-terrain';

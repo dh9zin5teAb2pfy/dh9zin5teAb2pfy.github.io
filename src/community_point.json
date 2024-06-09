@@ -1,8 +1,8 @@
 {
-    type: 'Feature',
-    geometry: {
-        type: 'LineString',
-        coordinates: [
+    "type": "Feature",
+    "geometry": {
+        "type": "LineString",
+        "coordinates": [
             [139.710454,35.828449],
             [139.71108,35.82825],
             [139.71208,35.82789],

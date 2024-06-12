@@ -9,7 +9,7 @@ import 'maplibre-gl-opacity/dist/maplibre-gl-opacity.css';
 
 //import shelterPointData from './shelter_point.json'; // 避難所データの読み込み
 import hazardLegendData from './hazard_legend.json'; // 凡例データの読み込み
-//import communityPointData from './community_point.json' // 上青木西町会境界線
+//import communityBorderData from './community_border.json' // 上青木西町会境界線
 
 // maplibre-gl-gsi-terrainの読み込み
 import { useGsiTerrainSource } from 'maplibre-gl-gsi-terrain';
@@ -180,6 +180,7 @@ const map = new maplibregl.Map({
                     ]
                     },
                      }
+            
             },
   
             gsi_vector: {
@@ -193,27 +194,26 @@ const map = new maplibregl.Map({
    
         },
         layers: [
-            {
+            {   // 地理院タイル
                 id: 'pales_layer', // レイヤーのID
                 source: 'pales', // ソースのID
                 type: 'raster', // データタイプはラスターを指定
                 layout: { visibility: 'none' }, // 初期状態を非表示にする（ほかのラスターレイヤーも同様）
             },
-            {
-                id: 'osm_layer', // レイヤーのID
-                source: 'osm', // ソースのID
-                type: 'raster', // データタイプはラスターを指定
-                layout: { visibility: 'none' }, // 初期状態を非表示にする（ほかのラスターレイヤーも同様）
+            {   // Open Street MAP
+                id: 'osm_layer',
+                source: 'osm',
+                type: 'raster',
+                layout: { visibility: 'none' },
             },
-            // 全国最新写真のレイヤーを表示
-            {
+            {   // 全国最新写真のレイヤーを表示
                 id: 'seamlessphoto_layer',
                 source: 'seamlessphoto',
                 type: 'raster',
                 layout: { visibility: 'none' },
             },
-            {
-                id: 'background', // マスクレイヤー
+            {   // マスクレイヤー
+                id: 'background',
                 type: 'background',
                 paint: {
                     'background-color': '#000', // レイヤーの色を設定
@@ -224,21 +224,21 @@ const map = new maplibregl.Map({
                 id: 'flood_layer', // 洪水浸水想定区域（想定最大規模）
                 source: 'flood',
                 type: 'raster',
-                paint: { 'raster-opacity': 0.8 },
+                paint: { 'raster-opacity': 0.7 },
                 layout: { visibility: 'none' },
             },
             {
                 id: 'hightide_layer', // 高潮浸水想定区域
                 source: 'hightide',
                 type: 'raster',
-                paint: { 'raster-opacity': 0.8 },
+                paint: { 'raster-opacity': 0.7 },
                 layout: { visibility: 'none' },
             },
             {
                 id: 'tsunami_layer', // 津波浸水想定
                 source: 'tsunami',
                 type: 'raster',
-                paint: { 'raster-opacity': 0.8 },
+                paint: { 'raster-opacity': 0.7 },
                 layout: { visibility: 'none' },
             },
             {
@@ -246,7 +246,7 @@ const map = new maplibregl.Map({
                 id: 'doseki_layer',
                 source: 'doseki',
                 type: 'raster',
-                paint: { 'raster-opacity': 0.8 },
+                paint: { 'raster-opacity': 0.7 },
                 layout: { visibility: 'none' },
             },
             {
@@ -254,7 +254,7 @@ const map = new maplibregl.Map({
                 id: 'kyukeisha_layer',
                 source: 'kyukeisha',
                 type: 'raster',
-                paint: { 'raster-opacity': 0.8 },
+                paint: { 'raster-opacity': 0.7 },
                 layout: { visibility: 'none' },
             },
             {
@@ -262,10 +262,10 @@ const map = new maplibregl.Map({
                 id: 'jisuberi_layer',
                 source: 'jisuberi',
                 type: 'raster',
-                paint: { 'raster-opacity': 0.8 },
+                paint: { 'raster-opacity': 0.7 },
                 layout: { visibility: 'none' },
             },
-            {
+            {   // 神青木西町会区域線
                 id: 'community_layer',
                 source: 'community',
                 type: 'line',
@@ -275,9 +275,8 @@ const map = new maplibregl.Map({
                    },
                 layout: { visibility: 'none' },
             },
-            
-            {
-                id: 'building', // 建物レイヤー
+            {   // 立体建物レイヤー
+                id: 'building',
                 source: 'gsi_vector',
                 'source-layer': 'building',
                 type: 'fill-extrusion',
@@ -364,7 +363,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster1'], // 属性:disaster1がtrueの地物のみ表示する
-                layout: { visibility: 'visible' }, // レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+                layout: { visibility: 'none' }, // visible レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
             {   // 崖崩れ/土石流/地滑り
                 id: 'skhb-2-layer',
@@ -455,7 +454,7 @@ const map = new maplibregl.Map({
                 layout: { visibility: 'none' },
             },
             {   // 大規模な火事
-                id: 'skhb-6-layer',
+                id: 'skhb6_layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
                 type: 'circle',
@@ -499,7 +498,7 @@ const map = new maplibregl.Map({
                 layout: { visibility: 'none' },
             },
             {   // 火山現象
-                id: 'skhb-8-layer',
+                id: 'skhb8_layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
                 type: 'circle',
@@ -541,12 +540,19 @@ const updatedLegend = (layerId: string) => {
 
     // JSONから凡例ラベルを取得
     const guideColor = hazardLegendData.find((data) => data.id === layerId)?.guide_color;
-    if (!guideColor) return;
+    if (!guideColor) {
+        // TODO 凡例を非表示にする
+        const legendDiv = document.querySelector('#hazard-legend');
+        if (!legendDiv) return;
+        legendDiv.hidden = true;
+        
+        return;
+    }
 
     // カラーガイドを表示する要素を取得
     const legendDiv = document.querySelector('#hazard-legend');
     if (!legendDiv) return;
-
+    legendDiv.hidden = false;
     // カラーガイドを変更
     legendDiv.innerHTML = guideColor.map((item) => `<div class='label' style='background:${item.color};'>${item.label}</div>`).join('');
 
@@ -639,13 +645,12 @@ map.on('load', () => {
             flood_layer: '洪水浸水想定区域',
             hightide_layer: '高潮浸水想定区域',
             tsunami_layer: '津波浸水想定',
-            doseki_layer: '土石流',
-            kyukeisha_layer: '急傾斜地',
-            jisuberi_layer: '地滑り',
-//            skhb4_layer: '地震緊急避難所'
-//            skhb-6-layer: '大規模な火事緊急避難所',
-//            skhb-8-layer: '火山緊急避難所'
-            //community_layer: '上青木西町会'
+            doseki_layer: '土石流警戒',
+            kyukeisha_layer: '急傾斜地警戒',
+            jisuberi_layer: '地滑り警戒',
+            skhb4_layer: '地震緊急避難所',
+            skhb6_layer: '大規模な火事避難',
+            skhb8_layer: '火山緊急避難所'
         },
     });
     map.addControl(hazardLayers, 'top-left');
@@ -702,9 +707,9 @@ map.on('load', () => {
                 'skhb-3-layer',
                 'skhb4_layer',
                 'skhb-5-layer',
-                'skhb-6-layer',
+                'skhb6_layer',
                 'skhb-7-layer',
-                'skhb-8-layer',
+                'skhb8_layer',
             ],
         });
         

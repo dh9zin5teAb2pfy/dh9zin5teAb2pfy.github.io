@@ -66,11 +66,6 @@ body {
         display: none;
     }
 
-    /* 到達圏レイヤーUIを非表示  */
-    #shelter-control {
-        display: none !important;
-    }
-
     /* スケールバーの位置を調整 */
     .maplibregl-ctrl-scale {
         margin-right: 10px !important;

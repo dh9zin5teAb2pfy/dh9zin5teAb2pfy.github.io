@@ -276,7 +276,7 @@ const map = new maplibregl.Map({
                 layout: { visibility: 'none' },
             },
             {   // 立体建物レイヤー
-                id: 'building',
+                id: 'building_layer',
                 source: 'gsi_vector',
                 'source-layer': 'building',
                 type: 'fill-extrusion',
@@ -343,7 +343,7 @@ const map = new maplibregl.Map({
             
             // 指定緊急避難場所ここから
             {   // 洪水
-                id: 'skhb-1-layer',
+                id: 'skhb1_layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
                 type: 'circle',
@@ -363,10 +363,10 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster1'], // 属性:disaster1がtrueの地物のみ表示する
-                layout: { visibility: 'none' }, // visible レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+                layout: { visibility: 'visible' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
             {   // 崖崩れ/土石流/地滑り
-                id: 'skhb-2-layer',
+                id: 'skhb2_layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
                 type: 'circle',
@@ -385,10 +385,10 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster2'],
-                layout: { visibility: 'none' },
+                layout: { visibility: 'visible' },
             },
             {   // 高潮
-                id: 'skhb-3-layer',
+                id: 'skhb3_layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
                 type: 'circle',
@@ -407,7 +407,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster3'],
-                layout: { visibility: 'none' },
+                layout: { visibility: 'visible' },
             },
             {   // 地震
                 id: 'skhb4_layer',
@@ -429,10 +429,10 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster4'],
-                layout: { visibility: 'none' },
+                layout: { visibility: 'visible' },
             },
             {   // 津波
-                id: 'skhb-5-layer',
+                id: 'skhb5_layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
                 type: 'circle',
@@ -451,7 +451,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster5'],
-                layout: { visibility: 'none' },
+                layout: { visibility: 'visible' },
             },
             {   // 大規模な火事
                 id: 'skhb6_layer',
@@ -473,10 +473,10 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster6'],
-                layout: { visibility: 'none' },
+                layout: { visibility: 'visible' },
             },
             {   // 内水氾濫
-                id: 'skhb-7-layer',
+                id: 'skhb7_layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
                 type: 'circle',
@@ -495,7 +495,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster7'],
-                layout: { visibility: 'none' },
+                layout: { visibility: 'visible' },
             },
             {   // 火山現象
                 id: 'skhb8_layer',
@@ -517,7 +517,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster8'],
-                layout: { visibility: 'none' },
+                layout: { visibility: 'visible' },
             },
 
         ],
@@ -544,7 +544,8 @@ const updatedLegend = (layerId: string) => {
         // TODO 凡例を非表示にする
         const legendDiv = document.querySelector('#hazard-legend');
         if (!legendDiv) return;
-        legendDiv.hidden = true;
+        
+        (legendDiv as HTMLInputElement).style.display = 'none';
         
         return;
     }
@@ -552,7 +553,9 @@ const updatedLegend = (layerId: string) => {
     // カラーガイドを表示する要素を取得
     const legendDiv = document.querySelector('#hazard-legend');
     if (!legendDiv) return;
-    legendDiv.hidden = false;
+    
+    (legendDiv as HTMLInputElement).style.display = 'block';
+    
     // カラーガイドを変更
     legendDiv.innerHTML = guideColor.map((item) => `<div class='label' style='background:${item.color};'>${item.label}</div>`).join('');
 
@@ -642,6 +645,7 @@ map.on('load', () => {
     // 災害情報レイヤーの切り替えコントロール
     const hazardLayers = new OpacityControl({
         baseLayers: {
+            building_layer: '避難所のみ',
             flood_layer: '洪水浸水想定区域',
             hightide_layer: '高潮浸水想定区域',
             tsunami_layer: '津波浸水想定',
@@ -702,13 +706,13 @@ map.on('load', () => {
         // クリック箇所に指定緊急避難場所レイヤーが存在するかどうかをチェック
         const features = map.queryRenderedFeatures(e.point, {
             layers: [
-                'skhb-1-layer',
-                'skhb-2-layer',
-                'skhb-3-layer',
+                'skhb1_layer',
+                'skhb2_layer',
+                'skhb3_layer',
                 'skhb4_layer',
-                'skhb-5-layer',
+                'skhb5_layer',
                 'skhb6_layer',
-                'skhb-7-layer',
+                'skhb7_layer',
                 'skhb8_layer',
             ],
         });
@@ -770,14 +774,14 @@ map.on('load', () => {
         // マウスカーソル以下に指定緊急避難場所レイヤーが存在するかどうかをチェック
         const features = map.queryRenderedFeatures(e.point, {
             layers: [
-                'skhb-1-layer',
-                'skhb-2-layer',
-                'skhb-3-layer',
+                'skhb1_layer',
+                'skhb2_layer',
+                'skhb3_layer',
                 'skhb4_layer',
-                'skhb-5-layer',
-                'skhb-6-layer',
-                'skhb-7-layer',
-                'skhb-8-layer',
+                'skhb5_layer',
+                'skhb6_layer',
+                'skhb7_layer',
+                'skhb8_layer',
             ],
         });
         if (features.length > 0) {

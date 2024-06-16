@@ -6,6 +6,7 @@
     "start_url":"./",
     "name":"試作版防災マップ",
     "short_name":"試作版",
+    "orientation": "portrait",
     "icons":[
         {"src":"./icon192.png",
             "size":"192x192",

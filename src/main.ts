@@ -301,7 +301,7 @@ const map = new maplibregl.Map({
                     ], // その他
                     'fill-extrusion-opacity': 0.4,
                 },
-                layout: { visibility: 'visible' },
+                layout: { visibility: 'none' },
             },
              
 //            {
@@ -687,8 +687,7 @@ map.on('load', () => {
 
     // ナビゲーションコントロールの追加
     map.addControl(new maplibregl.NavigationControl({}), 'top-right'); // 画面右上に追加
-
-
+    
     // 現在位置取得の機能
     const geolocationControl = new maplibregl.GeolocateControl({trackUserLocation: true, })
     // 現在地ボタン追加

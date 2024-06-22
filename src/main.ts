@@ -342,6 +342,28 @@ const map = new maplibregl.Map({
 //            },
             
             // 指定緊急避難場所ここから
+            {   // 全て
+                id: 'skhb0_layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        // ズームレベルに応じた円の大きさ
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                layout: { visibility: 'visible' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+            },
             {   // 洪水
                 id: 'skhb1_layer',
                 source: 'skhb',
@@ -363,9 +385,9 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster1'], // 属性:disaster1がtrueの地物のみ表示する
-                layout: { visibility: 'visible' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+                layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
-            {   // 崖崩れ/土石流/地滑り
+            {   // 土石流(崖崩れ/地滑り)
                 id: 'skhb2_layer',
                 source: 'skhb',
                 'source-layer': 'skhb',
@@ -385,7 +407,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster2'],
-                layout: { visibility: 'visible' },
+                layout: { visibility: 'none' },
             },
             {   // 高潮
                 id: 'skhb3_layer',
@@ -407,7 +429,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster3'],
-                layout: { visibility: 'visible' },
+                layout: { visibility: 'none' },
             },
             {   // 地震
                 id: 'skhb4_layer',
@@ -429,7 +451,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster4'],
-                layout: { visibility: 'visible' },
+                layout: { visibility: 'none' },
             },
             {   // 津波
                 id: 'skhb5_layer',
@@ -451,7 +473,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster5'],
-                layout: { visibility: 'visible' },
+                layout: { visibility: 'none' },
             },
             {   // 大規模な火事
                 id: 'skhb6_layer',
@@ -473,7 +495,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster6'],
-                layout: { visibility: 'visible' },
+                layout: { visibility: 'none' },
             },
             {   // 内水氾濫
                 id: 'skhb7_layer',
@@ -495,7 +517,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster7'],
-                layout: { visibility: 'visible' },
+                layout: { visibility: 'none' },
             },
             {   // 火山現象
                 id: 'skhb8_layer',
@@ -517,7 +539,51 @@ const map = new maplibregl.Map({
                     'circle-stroke-color': '#ffffff',
                 },
                 filter: ['get', 'disaster8'],
-                layout: { visibility: 'visible' },
+                layout: { visibility: 'none' },
+            },
+            {   // 急傾斜(崖崩れ/土石流/地滑り)
+                id: 'skhb9_layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster2'],
+                layout: { visibility: 'none' },
+            },
+            {   // 地滑り(崖崩れ/土石流)
+                id: 'skhb10_layer',
+                source: 'skhb',
+                'source-layer': 'skhb',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#6666cc',
+                    'circle-radius': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        6,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                filter: ['get', 'disaster2'],
+                layout: { visibility: 'none' },
             },
 
         ],
@@ -652,6 +718,7 @@ map.on('load', () => {
             doseki_layer: '土石流警戒',
             kyukeisha_layer: '急傾斜地警戒',
             jisuberi_layer: '地滑り警戒',
+            skhb7_layer: '内水氾濫緊急避難',
             skhb4_layer: '地震緊急避難所',
             skhb6_layer: '大規模な火事避難',
             skhb8_layer: '火山緊急避難所'
@@ -705,6 +772,7 @@ map.on('load', () => {
         // クリック箇所に指定緊急避難場所レイヤーが存在するかどうかをチェック
         const features = map.queryRenderedFeatures(e.point, {
             layers: [
+                'skhb0_layer',
                 'skhb1_layer',
                 'skhb2_layer',
                 'skhb3_layer',
@@ -713,6 +781,8 @@ map.on('load', () => {
                 'skhb6_layer',
                 'skhb7_layer',
                 'skhb8_layer',
+                'skhb9_layer',
+                'skhb10_layer',
             ],
         });
         
@@ -773,6 +843,7 @@ map.on('load', () => {
         // マウスカーソル以下に指定緊急避難場所レイヤーが存在するかどうかをチェック
         const features = map.queryRenderedFeatures(e.point, {
             layers: [
+                'skhb0_layer',
                 'skhb1_layer',
                 'skhb2_layer',
                 'skhb3_layer',
@@ -781,6 +852,8 @@ map.on('load', () => {
                 'skhb6_layer',
                 'skhb7_layer',
                 'skhb8_layer',
+                'skhb9_layer',
+                'skhb10_layer',
             ],
         });
         if (features.length > 0) {

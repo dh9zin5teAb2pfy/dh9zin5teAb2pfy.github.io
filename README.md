@@ -5,6 +5,8 @@
   - [MapLibre GL JS Plugins](https://maplibre.org/maplibre-gl-js/docs/plugins/)
 > **メモ**
 > ハザードマップを選んだら対応する避難場所のレイヤーを表示するようにする<br>
+> - ハザードマップレイヤーを再定義して[maplibre-gl-js](https://github.com/mug-jp/maplibre-gl-opacity)をいじるのが簡単
 > 多言語に対応できるようにする<br>
+> - 言語別にデプロイディレクトリを分ける方法が簡単なのかもしれない
 > スマートフォン用のユーザインターフェイス<br>
 > PWA<br>

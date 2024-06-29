@@ -362,7 +362,7 @@ const map = new maplibregl.Map({
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
                 },
-                layout: { visibility: 'visible' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+                layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
             {   // 洪水
                 id: 'skhb1_layer',

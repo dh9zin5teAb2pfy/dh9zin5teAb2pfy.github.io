@@ -27,7 +27,7 @@ body {
 /* スケールバー */
 .maplibregl-ctrl-scale {
   /* 位置を調整 */
-  margin-right: 140px !important;
+  margin-right: 140px !important; 
 }
 
 /* PCの場合、トグルボタンは非表示 */

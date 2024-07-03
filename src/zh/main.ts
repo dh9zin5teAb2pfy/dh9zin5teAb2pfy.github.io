@@ -303,43 +303,6 @@ const map = new maplibregl.Map({
                 },
                 layout: { visibility: 'none' },
             },
-             
-//            {
-//                id: 'clusters', // クラスター
-//                source: 'shelter',
-//                type: 'circle',
-//                filter: ['has', 'point_count'], // クラスターに含まれるポイントのみ表示
-//                paint: {
-//                    'circle-color': '#0BB1AF', // クラスターの色
-//                    'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40], // クラスターのポイント数に応じてサイズを変更
-//                    'circle-blur': 0.3, // クラスターのぼかし
-//                },
-//            },
-//            {
-//                id: 'cluster-count', // クラスターのポイントの数
-//                source: 'shelter',
-//                type: 'symbol',
-//                filter: ['has', 'point_count'], // クラスターに含まれるポイントのみ表示
-//                layout: {
-//                    'text-field': '{point_count_abbreviated}', // クラスターのポイント数を表示
-//                    'text-size': 12, // テキストのサイズ
-//                },
-//                paint: {
-//                    'text-color': '#FFF',
-//                },
-//            },
-//            {
-//                id: 'shelter_point',
-//                source: 'shelter',
-//                type: 'circle', // ポイントデータを表示するためにcircleを指定
-//                filter: ['!', ['has', 'point_count']], // クラスターに含まれないポイントのみ表示
-//                paint: {
-//                    'circle-color': '#0BB1AF', // ポイントの色
-//                    'circle-radius': 8, // ポイントのサイズ
-//                    'circle-stroke-width': 2, // ポイントの枠線の太さ
-//                    'circle-stroke-color': '#FFF', // ポイントの枠線の色
-//                },
-//            },
             
             // 指定緊急避難場所ここから
             {   // 全て
@@ -357,7 +320,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -379,7 +342,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -401,7 +364,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -423,7 +386,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -445,7 +408,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -467,7 +430,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -489,7 +452,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -511,7 +474,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -533,7 +496,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -555,7 +518,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -577,7 +540,7 @@ const map = new maplibregl.Map({
                         5,
                         2,
                         14,
-                        15,
+                        20,
                     ],
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
@@ -589,7 +552,7 @@ const map = new maplibregl.Map({
         ],
     },
     center: [139.71353, 35.82530], // 地図の中心座標
-    zoom: 14, // 地図の初期ズームレベル
+    zoom: 16, // 地図の初期ズームレベル
     maxZoom: 17.99, // 地図の最大ズームレベル
 });
 
@@ -699,28 +662,28 @@ map.on('load', () => {
     const baseMaps = new OpacityControl({
                              baseLayers: {
                                  // コントロールに表示するレイヤーの定義
-                                 pales_layer: '淡色地図',
-                                 osm_layer: 'OSマップ',
-                                 seamlessphoto_layer: '空中写真',
+                                 pales_layer: '淺色地圖',
+                                 osm_layer: 'OS地圖',
+                                 seamlessphoto_layer: '航空攝影',
                              },
                              overLayers:{
-                                 community_layer: '上青木西町会',
+                                 community_layer: '神大木西町協會',
                              }});
     map.addControl(baseMaps, 'top-left'); // 第二引数でUIの表示場所を定義
 
     // 災害情報レイヤーの切り替えコントロール
     const hazardLayers = new OpacityControl({
         baseLayers: {
-            building_layer: '避難所のみ',
-            flood_layer: '洪水浸水想定区域',
-            hightide_layer: '高潮浸水想定区域',
-            tsunami_layer: '津波浸水想定',
-            doseki_layer: '土石流警戒',
-            kyukeisha_layer: '急傾斜地警戒',
-            jisuberi_layer: '地滑り警戒',
-            skhb7_layer: '内水氾濫緊急避難',
+            building_layer: '僅庇護所',
+            flood_layer: '計將被淹沒的地區',
+            hightide_layer: '風暴潮淹沒區',
+            tsunami_layer: '海嘯淹沒假設',
+            doseki_layer: '土石流預警',
+            kyukeisha_layer: '陡坡警告',
+            jisuberi_layer: '山體滑坡警告',
+            skhb7_layer: '內陸洪水緊急疏散',
             skhb4_layer: '地震緊急避難所',
-            skhb6_layer: '大規模な火事避難',
+            skhb6_layer: '大規模火災疏散',
             skhb8_layer: '火山緊急避難所'
         },
     });

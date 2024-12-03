@@ -10,6 +10,7 @@ import 'maplibre-gl-opacity/dist/maplibre-gl-opacity.css';
 //import shelterPointData from './shelter_point.json'; // 避難所データの読み込み
 import hazardLegendData from './hazard_legend.json'; // 凡例データの読み込み
 //import communityBorderData from './community_border.json' // 上青木西町会境界線
+import fireextnguisherData from './fireextnguisher_point.json' // 街角消火器
 
 // maplibre-gl-gsi-terrainの読み込み
 import { useGsiTerrainSource } from 'maplibre-gl-gsi-terrain';
@@ -185,6 +186,34 @@ const map = new maplibregl.Map({
                     }
             },
   
+            fireextnguisher: {
+                type: 'geojson',
+                    data: {
+                           type: 'FeatureCollection',
+                          'features': [
+                              {type: 'Feature',
+                               geometry: {
+                                 type: 'Point',
+                                 coordinates: [
+                                     [139.71178,35.82502],
+                                     [139.71083,35.82684],
+                                     [139.71191,35.82765],
+                                     [139.71365,35.82444],
+                                     [139.71222,35.82428],
+                                     [139.71245,35.82426],
+                                     [139.71540,35.82602],
+                                     [139.71662,35.82407],
+                                     [139.71375,35.82560],
+                                     [139.71465,35.82670],
+                                     [139.71644,35.82548],
+                        
+                                 ]
+                               },
+                              },
+                          ]
+                    }
+            },
+
             gsi_vector: {
                 // 地理院ベクトル 建物表示用
                 type: 'vector',
@@ -267,7 +296,7 @@ const map = new maplibregl.Map({
                 paint: { 'raster-opacity': 0.7 },
                 layout: { visibility: 'none' },
             },
-            {   // 神青木西町会区域線
+            {   // 上青木西町会区域線
                 id: 'community_layer',
                 source: 'community',
                 type: 'line',
@@ -276,6 +305,28 @@ const map = new maplibregl.Map({
                     'line-width': 4,
                    },
                 layout: { visibility: 'none' },
+            },
+            {   // 街角消火器
+                id: 'fireextnguisher_layer',
+                source: 'fireextnguisher',
+                'source-layer': 'fireextnguisher',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#ff0000',
+                    'circle-radius': [
+                        // ズームレベルに応じた円の大きさ
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        15,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
             {   // 立体建物レイヤー
                 id: 'building_layer',
@@ -669,6 +720,7 @@ map.on('load', () => {
                              },
                              overLayers:{
                                  community_layer: '上青木西町会',
+                                 fireextnguisher_layer: '街角消火器',
                              }});
     map.addControl(baseMaps, 'top-left'); // 第二引数でUIの表示場所を定義
 

@@ -11,6 +11,8 @@ import 'maplibre-gl-opacity/dist/maplibre-gl-opacity.css';
 import hazardLegendData from './hazard_legend.json'; // 凡例データの読み込み
 //import communityBorderData from './community_border.json' // 上青木西町会境界線
 import fireextnguisherData from './fireextnguisher_point.json' // 街角消火器
+import phoneboxData from './phonebox_point.json' // 公衆電話
+import aedData from './aed_point.json' // AED
 
 // maplibre-gl-gsi-terrainの読み込み
 import { useGsiTerrainSource } from 'maplibre-gl-gsi-terrain';
@@ -136,11 +138,11 @@ const map = new maplibregl.Map({
                 tileSize: 256,
                 attribution: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html">ハザードマップポータルサイト</a>',
             },
-            community: {
+            community: { // 町会の境界線
                 type: 'geojson',
                     data: {
                            type: 'FeatureCollection',
-                          'features': [
+                          features: [
                               {type: 'Feature',
                                geometry: {
                                  type: 'LineString',
@@ -185,35 +187,21 @@ const map = new maplibregl.Map({
                           ]
                     }
             },
-  
-            fireextnguisher: {
+            fireextnguisher: {　// 街角消火器
                 type: 'geojson',
-                    data: {
-                           type: 'FeatureCollection',
-                          'features': [
-                              {type: 'Feature',
-                               geometry: {
-                                 type: 'Point',
-                                 coordinates: [
-                                     [139.71178,35.82502],
-                                     [139.71083,35.82684],
-                                     [139.71191,35.82765],
-                                     [139.71365,35.82444],
-                                     [139.71222,35.82428],
-                                     [139.71245,35.82426],
-                                     [139.71540,35.82602],
-                                     [139.71662,35.82407],
-                                     [139.71375,35.82560],
-                                     [139.71465,35.82670],
-                                     [139.71644,35.82548],
-                        
-                                 ]
-                               },
-                              },
-                          ]
-                    }
+                    data: fireextnguisherData,
+                attribution: '<a href="#">川口消防署</a>',
             },
-
+            phonebox: { // 公衆電話
+                type: 'geojson',
+                    data: phoneboxData,
+                attribution: '<a href="#">NTT</a>',
+            },
+            aed: { // AED
+                type: 'geojson',
+                    data: aedData,
+                attribution: '<a href="#">AED</a>',
+            },
             gsi_vector: {
                 // 地理院ベクトル 建物表示用
                 type: 'vector',
@@ -307,9 +295,8 @@ const map = new maplibregl.Map({
                 layout: { visibility: 'none' },
             },
             {   // 街角消火器
-                id: 'fireextnguisher_layer',
+                id: 'fireextnguisher_point',
                 source: 'fireextnguisher',
-                'source-layer': 'fireextnguisher',
                 type: 'circle',
                 paint: {
                     'circle-color': '#ff0000',
@@ -326,7 +313,49 @@ const map = new maplibregl.Map({
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
                 },
-                layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+                //layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+            },
+            {   // 公衆電話
+                id: 'phonebox_point',
+                source: 'phonebox',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#68d16a',
+                    'circle-radius': [
+                        // ズームレベルに応じた円の大きさ
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        15,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                //layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+            },
+            {   // AED
+                id: 'aed_point',
+                source: 'aed',
+                type: 'circle',
+                paint: {
+                    'circle-color': '#e09234',
+                    'circle-radius': [
+                        // ズームレベルに応じた円の大きさ
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        5,
+                        2,
+                        14,
+                        15,
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#ffffff',
+                },
+                //layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
             {   // 立体建物レイヤー
                 id: 'building_layer',

@@ -190,17 +190,14 @@ const map = new maplibregl.Map({
             fireextnguisher: {　// 街角消火器
                 type: 'geojson',
                     data: fireextnguisherData,
-                attribution: '<a href="#">川口消防署</a>',
             },
             phonebox: { // 公衆電話
                 type: 'geojson',
                     data: phoneboxData,
-                attribution: '<a href="#">NTT</a>',
             },
             aed: { // AED
                 type: 'geojson',
                     data: aedData,
-                attribution: '<a href="#">AED</a>',
             },
             gsi_vector: {
                 // 地理院ベクトル 建物表示用
@@ -295,7 +292,7 @@ const map = new maplibregl.Map({
                 layout: { visibility: 'none' },
             },
             {   // 街角消火器
-                id: 'fireextnguisher_point',
+                id: 'fireextnguisher_layer',
                 source: 'fireextnguisher',
                 type: 'circle',
                 paint: {
@@ -313,14 +310,16 @@ const map = new maplibregl.Map({
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
                 },
-                //layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+                layout: { visibility: 'none' },
+                // レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
             {   // 公衆電話
-                id: 'phonebox_point',
+                id: 'phonebox_layer',
                 source: 'phonebox',
                 type: 'circle',
                 paint: {
-                    'circle-color': '#68d16a',
+                    // 'circle-color': '#60A045',
+                    'circle-color': '#7AA850',
                     'circle-radius': [
                         // ズームレベルに応じた円の大きさ
                         'interpolate',
@@ -334,14 +333,14 @@ const map = new maplibregl.Map({
                     'circle-stroke-width': 1,
                     'circle-stroke-color': '#ffffff',
                 },
-                //layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+                layout: { visibility: 'none' },
             },
             {   // AED
-                id: 'aed_point',
+                id: 'aed_layer',
                 source: 'aed',
                 type: 'circle',
                 paint: {
-                    'circle-color': '#e09234',
+                    'circle-color': '#ffccff',
                     'circle-radius': [
                         // ズームレベルに応じた円の大きさ
                         'interpolate',
@@ -353,9 +352,9 @@ const map = new maplibregl.Map({
                         15,
                     ],
                     'circle-stroke-width': 1,
-                    'circle-stroke-color': '#ffffff',
+                    'circle-stroke-color': '#ff0000',
                 },
-                //layout: { visibility: 'none' }, // visible　| none レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
+                layout: { visibility: 'none' },
             },
             {   // 立体建物レイヤー
                 id: 'building_layer',
@@ -750,6 +749,8 @@ map.on('load', () => {
                              overLayers:{
                                  community_layer: '上青木西町会',
                                  fireextnguisher_layer: '街角消火器',
+                                 phonebox_layer: '公衆電話',
+                                 aed_layer: 'AED',
                              }});
     map.addControl(baseMaps, 'top-left'); // 第二引数でUIの表示場所を定義
 

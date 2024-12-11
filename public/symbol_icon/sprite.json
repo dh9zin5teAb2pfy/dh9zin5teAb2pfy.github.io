@@ -1,0 +1,65 @@
+{
+  "a_e_defibrillator": {
+    "height": 51,
+    "pixelRatio": 1,
+    "width": 51,
+    "x": 0,
+    "y": 0
+  },
+  "hospital": {
+    "height": 51,
+    "pixelRatio": 1,
+    "width": 51,
+    "x": 51,
+    "y": 0
+  },
+  "pharmacy": {
+    "height": 51,
+    "pixelRatio": 1,
+    "width": 51,
+    "x": 102,
+    "y": 0
+  },
+  "square": {
+    "height": 51,
+    "pixelRatio": 1,
+    "width": 51,
+    "x": 0,
+    "y": 51
+  },
+  "star": {
+    "height": 51,
+    "pixelRatio": 1,
+    "width": 51,
+    "x": 51,
+    "y": 51
+  },
+  "telephone": {
+    "height": 51,
+    "pixelRatio": 1,
+    "width": 51,
+    "x": 204,
+    "y": 0
+  },
+  "toilet": {
+    "height": 51,
+    "pixelRatio": 1,
+    "width": 51,
+    "x": 153,
+    "y": 0
+  },
+  "triangle": {
+    "height": 51,
+    "pixelRatio": 1,
+    "width": 51,
+    "x": 102,
+    "y": 51
+  },
+  "fire_ext": {
+    "height": 51,
+    "pixelRatio": 1,
+    "width": 51,
+    "x": 153,
+    "y": 51
+  }
+}

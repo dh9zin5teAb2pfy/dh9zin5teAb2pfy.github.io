@@ -7,12 +7,10 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import OpacityControl from 'maplibre-gl-opacity';
 import 'maplibre-gl-opacity/dist/maplibre-gl-opacity.css';
 
-//import shelterPointData from './shelter_point.json'; // 避難所データの読み込み
 import hazardLegendData from './hazard_legend.json'; // 凡例データの読み込み
-//import communityBorderData from './community_border.json' // 上青木西町会境界線
-import fireextnguisherData from './fireextnguisher_point.json' // 街角消火器
-import phoneboxData from './phonebox_point.json' // 公衆電話
-import aedData from './aed_point.json' // AED
+import fireextnguisherData from './fireextnguisher_point.json'; // 街角消火器
+import phoneboxData from './phonebox_point.json'; // 公衆電話
+import aedData from './aed_point.json'; // AED
 
 // maplibre-gl-gsi-terrainの読み込み
 import { useGsiTerrainSource } from 'maplibre-gl-gsi-terrain';
@@ -41,11 +39,13 @@ type HazardLegend = {
 const map = new maplibregl.Map({
     container: 'map',
     style: {
-        version: 8,
-        glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-        sources: {
-            terrain: gsiTerrainSource, // 地形ソース
-            pales: {
+        "version": 8,
+        "sprite": `${location.href.replace('/index.html','',)}/symbol_icon/sprite`,
+        //"sprite": "https://demotiles.maplibre.org/styles/osm-bright-gl-style/sprite",
+        "glyphs": 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+        "sources": {
+            "terrain": gsiTerrainSource, // 地形ソース
+            "pales": {
                 // ソースの定義
                 type: 'raster', // データタイプはラスターを指定
                 tiles: ['https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png'], // タイルのURL
@@ -138,6 +138,7 @@ const map = new maplibregl.Map({
                 tileSize: 256,
                 attribution: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html">ハザードマップポータルサイト</a>',
             },
+            
             community: { // 町会の境界線
                 type: 'geojson',
                     data: {
@@ -176,28 +177,22 @@ const map = new maplibregl.Map({
                                  ]
                                },
                               },
-                              {type: 'Feature',
-                                  'properties': {'id':1, 'name':'上青木西町会会館'},
-                               geometry: {
-                                   type: 'Point',
-                                       'coordinates': [139.71353, 35.82530]
-                                   
-                               }
+                              {'type': 'Feature',
+                               'properties': {'name':'上青木西町会会館'},
+                               'geometry': {'type': 'Point','coordinates': [139.71353, 35.82530]}
                               }
                           ]
                     }
             },
+            
             fireextnguisher: {　// 街角消火器
-                type: 'geojson',
-                    data: fireextnguisherData,
+                type: 'geojson', data: fireextnguisherData,
             },
             phonebox: { // 公衆電話
-                type: 'geojson',
-                    data: phoneboxData,
+                type: 'geojson', data: phoneboxData,
             },
             aed: { // AED
-                type: 'geojson',
-                    data: aedData,
+                type: 'geojson', data: aedData,
             },
             gsi_vector: {
                 // 地理院ベクトル 建物表示用
@@ -291,70 +286,47 @@ const map = new maplibregl.Map({
                    },
                 layout: { visibility: 'none' },
             },
-            {   // 街角消火器
-                id: 'fireextnguisher_layer',
-                source: 'fireextnguisher',
-                type: 'circle',
-                paint: {
-                    'circle-color': '#ff0000',
-                    'circle-radius': [
-                        // ズームレベルに応じた円の大きさ
-                        'interpolate',
-                        ['linear'],
-                        ['zoom'],
-                        5,
-                        2,
-                        14,
-                        15,
-                    ],
-                    'circle-stroke-width': 1,
-                    'circle-stroke-color': '#ffffff',
+            {   // 街角消火器 icon
+                "id": 'fireextnguisher_layer',
+                "source": 'fireextnguisher',
+                "type": 'symbol',
+                'layout': { 'icon-image': 'fire_ext',
+                    'icon-size': 1,
+                    'icon-allow-overlap': true,
+                    'icon-optional': true,
+                    'text-field': ['get', 'message'],
+                    'text-offset': [0, 1],
+                    'text-allow-overlap': true,
+                    'visibility': 'none'
                 },
-                layout: { visibility: 'none' },
-                // レイヤーの表示はOpacityControlで操作するためデフォルトで非表示にしておく
             },
-            {   // 公衆電話
-                id: 'phonebox_layer',
-                source: 'phonebox',
-                type: 'circle',
-                paint: {
-                    // 'circle-color': '#60A045',
-                    'circle-color': '#7AA850',
-                    'circle-radius': [
-                        // ズームレベルに応じた円の大きさ
-                        'interpolate',
-                        ['linear'],
-                        ['zoom'],
-                        5,
-                        2,
-                        14,
-                        15,
-                    ],
-                    'circle-stroke-width': 1,
-                    'circle-stroke-color': '#ffffff',
+            {   // 公衆電話 icon
+                "id": 'phonebox_layer',
+                "source": 'phonebox',
+                "type": 'symbol',
+                'layout': { 'icon-image': 'telephone',
+                    'icon-size': 0.5,
+                    'icon-allow-overlap': true,
+                    'icon-optional': true,
+                    'text-field': ['get', 'message'],
+                    'text-offset': [0, 1.5],
+                    'text-allow-overlap': true,
+                    'visibility': 'none'
                 },
-                layout: { visibility: 'none' },
             },
-            {   // AED
-                id: 'aed_layer',
-                source: 'aed',
-                type: 'circle',
-                paint: {
-                    'circle-color': '#ffccff',
-                    'circle-radius': [
-                        // ズームレベルに応じた円の大きさ
-                        'interpolate',
-                        ['linear'],
-                        ['zoom'],
-                        5,
-                        2,
-                        14,
-                        15,
-                    ],
-                    'circle-stroke-width': 1,
-                    'circle-stroke-color': '#ff0000',
+            {   // AED icon
+                "id": 'aed_layer',
+                "source": 'aed',
+                "type": 'symbol',
+                'layout': { 'icon-image': 'a_e_defibrillator',
+                    'icon-size': 0.5,
+                    'icon-allow-overlap': true,
+                    'icon-optional': true,
+                    'text-field': ['get', 'message'],
+                    'text-offset': [0, 1.5],
+                    'text-allow-overlap': true,
+                    'visibility': 'none'
                 },
-                layout: { visibility: 'none' },
             },
             {   // 立体建物レイヤー
                 id: 'building_layer',
@@ -672,6 +644,31 @@ const updatedLegend = (layerId: string) => {
     popup && popup.remove();
 };
 
+// add markers to map
+// https://maplibre.org/maplibre-gl-js/docs/examples/custom-marker-icons/
+// marker はカスタムのスタイル
+/*
+samplePoint.features.forEach((marker) => {
+    // create a DOM element for the marker
+    const el = document.createElement('div');
+    el.className = 'marker';
+    el.style.backgroundImage =
+            `url(https://picsum.photos/${
+                marker.properties.iconSize.join('/')
+            }/)`;
+    el.style.width = `${marker.properties.iconSize[0]}px`;
+    el.style.height = `${marker.properties.iconSize[1]}px`;
+
+    el.addEventListener('click', () => {
+        window.alert(marker.properties.message);
+    });
+
+    // add marker to map
+    new maplibregl.Marker({element: el})
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+});
+*/
 /**
  * 現在選択されている指定緊急避難場所レイヤー(skhb)を特定しそのfilter条件を返す
  */
@@ -749,8 +746,9 @@ map.on('load', () => {
                              overLayers:{
                                  community_layer: '上青木西町会',
                                  fireextnguisher_layer: '街角消火器',
-                                 phonebox_layer: '公衆電話',
                                  aed_layer: 'AED',
+                                 phonebox_layer: '公衆電話',
+
                              }});
     map.addControl(baseMaps, 'top-left'); // 第二引数でUIの表示場所を定義
 

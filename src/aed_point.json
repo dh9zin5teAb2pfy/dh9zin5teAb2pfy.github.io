@@ -1,15 +1,13 @@
 {
-"type": "FeatureCollection",
-"name": "fireextinguisher",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "AED": "テニス管理棟", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "西青木4-8-1", "緯度": 35.82301, "経度": 139.71065, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71065, 35.82301 ] } },
-{ "type": "Feature", "properties": { "AED": "保育所事務室", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西2-14-14", "緯度": 35.82549, "経度": 139.71673, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71673, 35.82549 ] } },
-{ "type": "Feature", "properties": { "AED": "サンドラッグ", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西1-11-3", "緯度": 35.82721, "経度": 139.71029, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71029, 35.82721 ] } },
-{ "type": "Feature", "properties": { "AED": "スギ薬局", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西1-19-9", "緯度": 35.82478, "経度": 139.7126, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.7126, 35.82478 ] } },
-{ "type": "Feature", "properties": { "AED": "デイサービスぴゅあ", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西2-4-8", "緯度": 35.82548, "経度": 139.7138, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.7138, 35.82548 ] } },
-{ "type": "Feature", "properties": { "AED": "生涯学習プラザ", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西1-2-25", "緯度": 35.82374, "経度": 139.71201, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71201, 35.82374 ] } },
-{ "type": "Feature", "properties": { "AED": "コーナン川口前川店", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "南前川1-16-7", "緯度": 35.82799, "経度": 139.71, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71, 35.82799 ] } },
-{ "type": "Feature", "properties": { "AED": "ローソン蕨塚越6丁目店", "地方公共団体コード": 0, "都道府県": "埼玉県", "指定市区町村名": "蕨市", "所在地住所": "塚越6-30-6", "緯度": 35.8255, "経度": 139.70957, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.70957, 35.8255 ] } }
+    "type": "FeatureCollection",
+    "features": [
+                  { "type": "Feature", "properties": {"message": "テニス管理棟"}, "geometry": {"type": "Point", "coordinates": [ 139.71065, 35.82301 ] }},
+                  { "type": "Feature", "properties": { "message": "保育所事務室"}, "geometry": { "type": "Point", "coordinates": [ 139.71673, 35.82549 ] }},
+                  { "type": "Feature", "properties": { "message": "サンドラッグ"}, "geometry": { "type": "Point", "coordinates": [ 139.71029, 35.82721 ] }},
+                  { "type": "Feature", "properties": { "message": "スギ薬局"}, "geometry": { "type": "Point", "coordinates": [ 139.7126, 35.82478 ] }},
+                  { "type": "Feature", "properties": { "message": "デイサービスぴゅあ"}, "geometry": { "type": "Point", "coordinates": [ 139.7138, 35.82548 ] }},
+                  { "type": "Feature", "properties": { "message": "生涯学習プラザ"}, "geometry": { "type": "Point", "coordinates": [ 139.71201, 35.82374 ] }},
+                  { "type": "Feature", "properties": { "message": "コーナン川口前川店"}, "geometry": { "type": "Point", "coordinates": [ 139.71, 35.82799 ] }},
+                  { "type": "Feature", "properties": { "message": "ローソン蕨塚越6丁目店"}, "geometry": { "type": "Point", "coordinates": [ 139.70957, 35.8255 ] }}
 ]
 }

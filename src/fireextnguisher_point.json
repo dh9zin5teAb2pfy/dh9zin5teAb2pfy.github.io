@@ -1,21 +1,15 @@
 {
 "type": "FeatureCollection",
-"name": "fireextinguisher",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-
-    { "type": "Feature", "properties": { "消火器": "ブロック塀", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西1-4-21", "緯度": 35.82502, "経度": 139.71178, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71178, 35.82502 ] } },
-
-{ "type": "Feature", "properties": { "消火器": "ブロック塀", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木1-7-14", "緯度": 35.82684, "経度": 139.71083, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71083, 35.82684 ] } },
-{ "type": "Feature", "properties": { "消火器": "ブロック塀", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西1-13-21", "緯度": 35.82765, "経度": 139.71191, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71191, 35.82765 ] } },
-{ "type": "Feature", "properties": { "消火器": "ブロック塀", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西1-19-24", "緯度": 35.82444, "経度": 139.71365, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71365, 35.82444 ] } },
-{ "type": "Feature", "properties": { "消火器": "ブロック塀", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西1-19-38", "緯度": 35.82428, "経度": 139.71222, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71222, 35.82428 ] } },
-{ "type": "Feature", "properties": { "消火器": "外壁", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西1-19-39", "緯度": 35.82426, "経度": 139.71245, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71245, 35.82426 ] } },
-{ "type": "Feature", "properties": { "消火器": "フェンス", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西2-6-12", "緯度": 35.82602, "経度": 139.71540, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71540, 35.82602 ] } },
-{ "type": "Feature", "properties": { "消火器": "ブロック塀", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西2-13-4", "緯度": 35.82407, "経度": 139.71662, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71662, 35.82407 ] } },
-{ "type": "Feature", "properties": { "消火器": "ブロック塀", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西2-5-1", "緯度": 35.8256, "経度": 139.71375, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71375, 35.82560 ] } },
-{ "type": "Feature", "properties": { "消火器": "ブロック塀", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西1-15-17", "緯度": 35.82673, "経度": 139.71368, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71368, 35.82673 ] } },
-{ "type": "Feature", "properties": { "消火器": "ブロック塀", "地方公共団体コード": 112038, "都道府県": "埼玉県", "指定市区町村名": "川口市", "所在地住所": "上青木西2-9-16", "緯度": 35.82548, "経度": 139.71644, "エレベーター無し/\n避難スペースが１階": null, "スロープ等": null, "点字ブロック": null, "車椅子使用者対応トイレ": null, "その他": null }, "geometry": { "type": "Point", "coordinates": [ 139.71644, 35.82548 ] } }
-
+"features": [{ "type": "Feature", "properties": { "消火器": "ブロック塀"}, "geometry": { "type": "Point", "coordinates": [ 139.71178, 35.82502 ] }},
+{ "type": "Feature", "properties": { "消火器": "ブロック塀"}, "geometry": { "type": "Point", "coordinates": [ 139.71083, 35.82684 ] }},
+{ "type": "Feature", "properties": { "消火器": "ブロック塀"}, "geometry": { "type": "Point", "coordinates": [ 139.71191, 35.82765 ] }},
+{ "type": "Feature", "properties": { "消火器": "ブロック塀"}, "geometry": { "type": "Point", "coordinates": [ 139.71365, 35.82444 ] }},
+{ "type": "Feature", "properties": { "消火器": "ブロック塀"}, "geometry": { "type": "Point", "coordinates": [ 139.71222, 35.82428 ] }},
+{ "type": "Feature", "properties": { "消火器": "外壁"}, "geometry": { "type": "Point", "coordinates": [ 139.71245, 35.82426 ] }},
+{ "type": "Feature", "properties": { "消火器": "フェンス"}, "geometry": { "type": "Point", "coordinates": [ 139.71540, 35.82602 ] }},
+{ "type": "Feature", "properties": { "消火器": "ブロック塀"}, "geometry": { "type": "Point", "coordinates": [ 139.71662, 35.82407 ] }},
+{ "type": "Feature", "properties": { "消火器": "ブロック塀"}, "geometry": { "type": "Point", "coordinates": [ 139.71375, 35.82560 ] }},
+{ "type": "Feature", "properties": { "消火器": "ブロック塀"}, "geometry": { "type": "Point", "coordinates": [ 139.71368, 35.82673 ] }},
+{ "type": "Feature", "properties": { "消火器": "ブロック塀"}, "geometry": { "type": "Point", "coordinates": [ 139.71644, 35.82548 ] }}
 ]
 }

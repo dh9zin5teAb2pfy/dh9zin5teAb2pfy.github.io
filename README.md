@@ -8,3 +8,5 @@ Software Design 2024 年 3 月号 「位置情報エンジニアリングのす�
 npm install
 npm run dev
 ```
+- 動作確認
+https://dh9zin5teab2pfy.github.io/dist/

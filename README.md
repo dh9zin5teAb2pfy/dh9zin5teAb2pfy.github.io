@@ -8,3 +8,5 @@
 > 多言語に対応できるようにする<br>
 > スマートフォン用のユーザインターフェイス<br>
 > PWA<br>
+- 動作確認
+https://dh9zin5teab2pfy.github.io/dist/

@@ -8,6 +8,7 @@
                   { "type": "Feature", "properties": { "message": "デイサービスぴゅあ"}, "geometry": { "type": "Point", "coordinates": [ 139.7138, 35.82548 ] }},
                   { "type": "Feature", "properties": { "message": "生涯学習プラザ"}, "geometry": { "type": "Point", "coordinates": [ 139.71201, 35.82374 ] }},
                   { "type": "Feature", "properties": { "message": "コーナン川口前川店"}, "geometry": { "type": "Point", "coordinates": [ 139.71, 35.82799 ] }},
+                  { "type": "Feature", "properties": { "message": "コープ野村"}, "geometry": { "type": "Point", "coordinates": [ 139.71383, 35.82307 ] }},
                   { "type": "Feature", "properties": { "message": "ローソン蕨塚越6丁目店"}, "geometry": { "type": "Point", "coordinates": [ 139.70957, 35.8255 ] }}
 ]
 }

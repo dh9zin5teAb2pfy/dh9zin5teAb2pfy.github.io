@@ -1,0 +1,10 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        { "type": "Feature", "properties": { "message": ""}, "geometry": { "type": "Point", "coordinates": [ 139.71593, 35.82350 ] }},
+        { "type": "Feature", "properties": { "message": "男女別"}, "geometry": { "type": "Point", "coordinates": [ 139.70928, 35.82336 ] }},
+        { "type": "Feature", "properties": { "message": "車椅子"}, "geometry": { "type": "Point", "coordinates": [ 139.71068, 35.82299 ] }},
+        { "type": "Feature", "properties": { "message": "男女別"}, "geometry": { "type": "Point", "coordinates": [ 139.71224, 35.82202 ] }},
+        { "type": "Feature", "properties": { "message": "多目的トイレ"}, "geometry": { "type": "Point", "coordinates": [ 139.71158, 35.82101 ] }}
+]
+}

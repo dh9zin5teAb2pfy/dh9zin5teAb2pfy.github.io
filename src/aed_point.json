@@ -1,14 +1,18 @@
 {
     "type": "FeatureCollection",
     "features": [
-                  { "type": "Feature", "properties": {"message": "テニス管理棟"}, "geometry": {"type": "Point", "coordinates": [ 139.71065, 35.82301 ] }},
+                  { "type": "Feature", "properties": {"message": "テニス管理棟"}, "geometry": {"type": "Point", "coordinates": [ 139.71049, 35.82303 ] }},
+                  { "type": "Feature", "properties": { "message": "市民プール窓口"}, "geometry": { "type": "Point", "coordinates": [ 139.71163, 35.82307 ] }},
+                  { "type": "Feature", "properties": { "message": "野球場正面入り口"}, "geometry": { "type": "Point", "coordinates": [ 139.70998, 35.82099 ] }},
                   { "type": "Feature", "properties": { "message": "保育所事務室"}, "geometry": { "type": "Point", "coordinates": [ 139.71673, 35.82549 ] }},
+                  { "type": "Feature", "properties": { "message": "公民館事務室"}, "geometry": { "type": "Point", "coordinates": [ 139.71720, 35.82561 ] }},
                   { "type": "Feature", "properties": { "message": "サンドラッグ"}, "geometry": { "type": "Point", "coordinates": [ 139.71029, 35.82721 ] }},
                   { "type": "Feature", "properties": { "message": "スギ薬局"}, "geometry": { "type": "Point", "coordinates": [ 139.7126, 35.82478 ] }},
                   { "type": "Feature", "properties": { "message": "デイサービスぴゅあ"}, "geometry": { "type": "Point", "coordinates": [ 139.7138, 35.82548 ] }},
                   { "type": "Feature", "properties": { "message": "生涯学習プラザ"}, "geometry": { "type": "Point", "coordinates": [ 139.71201, 35.82374 ] }},
                   { "type": "Feature", "properties": { "message": "コーナン川口前川店"}, "geometry": { "type": "Point", "coordinates": [ 139.71, 35.82799 ] }},
-                  { "type": "Feature", "properties": { "message": "コープ野村"}, "geometry": { "type": "Point", "coordinates": [ 139.71383, 35.82307 ] }},
-                  { "type": "Feature", "properties": { "message": "ローソン蕨塚越6丁目店"}, "geometry": { "type": "Point", "coordinates": [ 139.70957, 35.8255 ] }}
+                  { "type": "Feature", "properties": { "message": "ローソン蕨塚越6丁目店"}, "geometry": { "type": "Point", "coordinates": [ 139.70957, 35.8255 ] }},
+                  { "type": "Feature", "properties": { "message": "りそな銀行"}, "geometry": { "type": "Point", "coordinates": [ 139.70855, 35.81834 ] }},
+                  { "type": "Feature", "properties": { "message": "みずほ銀行"}, "geometry": { "type": "Point", "coordinates": [ 139.70594, 35.81668 ] }}
 ]
 }

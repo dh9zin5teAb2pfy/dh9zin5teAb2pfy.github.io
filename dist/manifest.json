@@ -4,8 +4,8 @@
     "display":"standalone",
     "scope":"./",
     "start_url":"./",
-    "name":"上青木西町会防災マップ",
-    "short_name":"西町会マップ",
+    "name":"試作版防災マップ",
+    "short_name":"試作版",
     "icons":[
         {"src":"./icon.192.png",
             "sizes":"192x192",

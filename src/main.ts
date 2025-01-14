@@ -11,6 +11,7 @@ import hazardLegendData from './hazard_legend.json'; // 凡例データの読み
 import fireextnguisherData from './fireextnguisher_point.json'; // 街角消火器
 import phoneboxData from './phonebox_point.json'; // 公衆電話
 import aedData from './aed_point.json'; // AED
+import toiletData from './toilet_point.json'; // お手洗い
 
 // maplibre-gl-gsi-terrainの読み込み
 import { useGsiTerrainSource } from 'maplibre-gl-gsi-terrain';
@@ -194,6 +195,9 @@ const map = new maplibregl.Map({
             aed: { // AED
                 type: 'geojson', data: aedData,
             },
+            toilet: { // お手洗い
+                type: 'geojson', data: toiletData,
+            },
             gsi_vector: {
                 // 地理院ベクトル 建物表示用
                 type: 'vector',
@@ -319,6 +323,20 @@ const map = new maplibregl.Map({
                 "source": 'aed',
                 "type": 'symbol',
                 'layout': { 'icon-image': 'a_e_defibrillator',
+                    'icon-size': 0.5,
+                    'icon-allow-overlap': true,
+                    'icon-optional': true,
+                    'text-field': ['get', 'message'],
+                    'text-offset': [0, 1.5],
+                    'text-allow-overlap': true,
+                    'visibility': 'none'
+                },
+            },
+            {   // Toilet icon
+                "id": 'toilet_layer',
+                "source": 'toilet',
+                "type": 'symbol',
+                'layout': { 'icon-image': 'toilet',
                     'icon-size': 0.5,
                     'icon-allow-overlap': true,
                     'icon-optional': true,
@@ -739,8 +757,8 @@ map.on('load', () => {
     const baseMaps = new OpacityControl({
                              baseLayers: {
                                  // コントロールに表示するレイヤーの定義
-                                 pales_layer: '淡色地図',
                                  osm_layer: 'OSマップ',
+                                 pales_layer: '淡色地図',
                                  seamlessphoto_layer: '空中写真',
                              },
                              overLayers:{
@@ -748,7 +766,7 @@ map.on('load', () => {
                                  fireextnguisher_layer: '街角消火器',
                                  aed_layer: 'AED',
                                  phonebox_layer: '公衆電話',
-
+                                 toilet_layer: 'トイレ',
                              }});
     map.addControl(baseMaps, 'top-left'); // 第二引数でUIの表示場所を定義
 
